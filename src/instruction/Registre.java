@@ -33,9 +33,9 @@ public enum Registre {
 
     /**
      * @param code
-     * @return  A register object from a string code
+     * @return  le registre correspondant a son string
      */
-    public static Registre getRegistre(String code){
+    public static Registre getRegistre(String code) throws Exception{
         switch (code) {
             case "R0": return Registre.R0;
             case "R1": return Registre.R1;
@@ -45,6 +45,8 @@ public enum Registre {
             case "R5": return Registre.R5;
             case "R6": return Registre.R6;
             case "R7": return Registre.R7;
+            default:
+                throw new Exception("Syntax Error : Bad register name ");
         }
     }
 }
