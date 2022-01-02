@@ -29,6 +29,4 @@ public class Lecture{
         String ligne = scan.nextLine();
         return new ArrayList<>(List.of(ligne.split(" ")));
     }
-
-
 }
