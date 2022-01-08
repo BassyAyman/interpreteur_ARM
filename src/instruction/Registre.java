@@ -24,7 +24,7 @@ public enum Registre {
     /**
      * @return representation binaire de la valeur
      */
-    public String versBinaryString(){
+    public String toBinaryString(){
         String val = "000" + Integer.toBinaryString(value);
         return val.substring(val.length()-3);
     }

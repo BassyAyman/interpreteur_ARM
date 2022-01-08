@@ -157,25 +157,25 @@ public enum Operation {
             case("LDR") : return LDR;
             case("ADD") : return ADD;
             case("SUB") : return SUB;
-            case("B") : return B;
+            case("b") : return B;
             // case de B avec condition
-            case("B<EQ>") : return B_EQ;
-            case("B<NE>") : return B_NE;
-            case("B<CS>") : return B_CS;
-            case("B<HS>") : return B_HS;
-            case("B<CC>") : return B_CC;
-            case("B<LO>") : return B_LO;
-            case("B<MI>") : return B_MI;
-            case("B<PL>") : return B_PL;
-            case("B<VS>") : return B_VS;
-            case("B<VC>") : return B_VC;
-            case("B<HI>") : return B_HI;
-            case("B<LS>") : return B_LS;
-            case("B<GE>") : return B_GE;
-            case("B<LT>") : return B_LT;
-            case("B<GT>") : return B_GT;
-            case("B<LE>") : return B_LE;
-            case("B<AL>") : return B_AL;
+            case("bEQ") : return B_EQ;
+            case("bNE") : return B_NE;
+            case("bCS") : return B_CS;
+            case("bHS") : return B_HS;
+            case("bCC") : return B_CC;
+            case("bLO") : return B_LO;
+            case("bMI") : return B_MI;
+            case("bPL") : return B_PL;
+            case("bVS") : return B_VS;
+            case("bVC") : return B_VC;
+            case("bHI") : return B_HI;
+            case("bLS") : return B_LS;
+            case("bGE") : return B_GE;
+            case("bLT") : return B_LT;
+            case("bGT") : return B_GT;
+            case("bLE") : return B_LE;
+            case("bAL") : return B_AL;
 
             default:
                 throw new Exception(" Syntax Error : Bad operator name ");
