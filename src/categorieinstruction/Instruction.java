@@ -3,6 +3,8 @@ package categorieinstruction;
 import instruction.Categorie;
 import instruction.Operation;
 
+import java.util.Locale;
+
 public abstract class Instruction {
 
     /**
@@ -63,6 +65,19 @@ public abstract class Instruction {
     public String toBinaireCode(){
         this.constructionCodeBinaire();
         return this.getBinaireStringCode();
+    }
+
+    /**
+     * @return un representation en hexa
+     */
+    public String toHexCode(){
+        String binaire = toBinaireCode();
+        StringBuilder val = new StringBuilder();
+
+        for (int i = 0; i <= 12; i=i+4) {
+            val.append(Integer.toHexString(Integer.parseInt(binaire.substring(i, i + 4), 2)).toLowerCase(Locale.ROOT));
+        }
+        return val.toString();
     }
 
 

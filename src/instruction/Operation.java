@@ -1,5 +1,7 @@
 package instruction;
 
+import java.util.Locale;
+
 public enum Operation {
     // categorie A - shift add sub move [ A1 - register/ A2 - Imm3/ A3 - Imm5/ A4 - Imm8]
     LSLS_A("000",Categorie.A3),
@@ -103,11 +105,11 @@ public enum Operation {
     /**
      * @param label etiquette associer a l'operation
      * @param valeur faux si pas de # ,vrai si # dans l'expression (donc si imm)
-     * @param tailleLine taille de l'instruction, si 2 -> imm3 autre(si 4) -> imm8
+     * @param isImm8 appliquer a adds ou subs, vrai si imm8 (SUBS3/ADDS3), faux si pas imm8
      * @return l'operation assossier
      */
-    public static Operation getOperation(String label,boolean valeur,int tailleLine) throws Exception{
-        switch (label){
+    public static Operation getOperation(String label,boolean valeur,boolean isImm8) throws Exception{
+        switch (label.toUpperCase(Locale.ROOT)){
             case("LSLS") : {
                 if(valeur) return LSLS_A;
                 else return LSLS_B;
@@ -122,14 +124,14 @@ public enum Operation {
             }
             case("ADDS") : {
                 if(valeur){
-                    if(tailleLine == 2) return ADDS2;
-                    else return ADDS3;
+                    if(isImm8) return ADDS3;
+                    else return ADDS2;
                 }else return ADDS1;
             }
             case("SUBS") : {
                 if(valeur){
-                    if(tailleLine == 2) return SUBS2;
-                    else return SUBS3;
+                    if(isImm8) return SUBS3;
+                    else return SUBS2;
                 }else return SUBS1;
             }
             case("CMP") : {

@@ -22,11 +22,12 @@ public class Interpreteur {
         int instructionPtr = 1;
 
         while(ligne != null){
-            if(!(ligne.trim().startsWith(";") || ligne.trim().startsWith("@"))){
+            if(!(ligne.trim().startsWith(";") || ligne.trim().startsWith("@") || ligne.trim().isEmpty())){
                 try {
                     this.instructionManager.traitementLigne(ligne,instructionPtr);
                 }
                 catch (Exception e) {
+                    e.printStackTrace();
                     throw new Exception(e.getMessage().concat(" [ On line : " + instructionPtr +" ]" ));
                 }
             }
@@ -36,5 +37,11 @@ public class Interpreteur {
         }
 
         List<Instruction> rom = instructionManager.getTheROM();
+
+        EcriveurFichier ecriveur = new EcriveurFichier();
+
+        String filename = programe.getNomFichier().substring(0,programe.getNomFichier().indexOf("."));
+
+        ecriveur.createROMFile(rom,filename,".bin");
     }
 }

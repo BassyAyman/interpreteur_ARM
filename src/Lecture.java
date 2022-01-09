@@ -1,12 +1,14 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Lecture{
 
     private String nomFichier;
+
+    public String getNomFichier() {
+        return nomFichier;
+    }
 
     private Scanner scan;
 
@@ -26,6 +28,14 @@ public class Lecture{
      * et renvoie ligne par ligne une liste string des elements
      */
     public String lecture(){
-        return scan.nextLine();
+        try{
+            return scan.nextLine();
+        }
+        catch(NoSuchElementException e){
+            System.out.println("fin lecture fichier");
+            scan.close();
+            return null;
+        }
     }
+
 }

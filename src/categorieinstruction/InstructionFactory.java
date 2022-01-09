@@ -10,10 +10,16 @@ public class InstructionFactory {
     public InstructionFactory(){}
 
     /**
-     * recupere la taille du tableau d'instruction apres separation au niveau des " ",
+     * verifie si dans l'instruction adds ou subs il y a la presence d'un caractere
+     * [ ou ] qui signifierai qu'il s'agit d'une instruction imm8 et donc
+     * renvoie true, false sinon
      */
-    private int getSizeString(String line){
-        return line.split(" ").length;
+    private boolean isImm8String(String line){
+        String[] tab = line.split(" ");
+        for (String partie: tab) {
+            if(partie.contains("[") || partie.contains("]")) return true;
+        }
+        return false;
     }
 
     private boolean isImmIn(String line){
@@ -31,7 +37,7 @@ public class InstructionFactory {
 
         String instrWord = lineToProcess.substring(0,firstSepPosition);
 
-        Operation operation = Operation.getOperation(instrWord,isImmIn(lineToProcess),getSizeString(lineToProcess));
+        Operation operation = Operation.getOperation(instrWord,isImmIn(lineToProcess),isImm8String(lineToProcess));
 
         if(operation == null) throw new Exception("Syntax Error : Unknow Operation "+instrWord);
 
@@ -111,14 +117,14 @@ public class InstructionFactory {
 
         Registre rt = Registre.getRegistre(operandesTab[0].trim());
         //a voir ici pour la maj des variables
-        String imm8 = operandesTab[1].trim();
+        String imm8 = operandesTab[2].trim();
 
         return new InstructionC(op,rt,imm8);
     }
 
     public Instruction buildInstCatD(Operation op, String operandesString) throws Exception{
-        String [] operandesTab = processOperands(operandesString,3);
-        String imm7 = operandesTab[2].trim();
+        String [] operandesTab = processOperands(operandesString,2); // bizarre dans la doc c 3 dans les tests c'est 2
+        String imm7 = operandesTab[1].trim();
 
         return new InstructionD(op,imm7);
     }

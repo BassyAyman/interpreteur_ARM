@@ -14,6 +14,14 @@ public class InstructionD extends Instruction{
     }
 
     /**
+     * methode qui va prendre la valeur d'un imm7
+     * et va le diviser par 4.
+     */
+    private int divis4(int value){
+        return (value/4);
+    }
+
+    /**
      * ajuste le code binaire de l'imm8 en cas de depassement
      * @return representation binaire de la valeur
      */
@@ -28,7 +36,7 @@ public class InstructionD extends Instruction{
         if(!imm7.trim().startsWith("#"))
             throw new RuntimeException("erreur syntax");
         int val = Integer.parseUnsignedInt(imm7.substring(1));
-        this.imm7 = toBinaryString(val);
+        this.imm7 = toBinaryString(divis4(val));
     }
 
     @Override

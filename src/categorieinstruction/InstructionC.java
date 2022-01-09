@@ -16,6 +16,15 @@ public class InstructionC extends Instruction{
         setRd(Rt);
     }
 
+
+    /**
+     * methode qui va prendre la valeur d'un imm7
+     * et va le diviser par 4.
+     */
+    private int divis4(int value){
+        return (value/4);
+    }
+
     /**
      * ajuste le code binaire de l'imm8 en cas de depassement
      * @return representation binaire de la valeur
@@ -30,8 +39,8 @@ public class InstructionC extends Instruction{
             throw new RuntimeException("set une valeur de imm3 nul");
         if(!imm8.trim().startsWith("#"))
             throw new RuntimeException("erreur syntax");
-        int val = Integer.parseUnsignedInt(imm8.substring(1));
-        this.imm8 = toBinaryString(val);
+        int val = Integer.parseUnsignedInt(imm8.replace("]","").substring(1));
+        this.imm8 = toBinaryString( divis4(val));
     }
 
     private void setRd(Registre Rt) throws Exception {
