@@ -10,7 +10,7 @@ public class InstructionD extends Instruction{
 
     public InstructionD(Operation operation, String imm7) throws Exception{
         super(Categorie.D,operation);
-        setImm8(imm7);
+        setImm7(imm7);
     }
 
     /**
@@ -22,7 +22,7 @@ public class InstructionD extends Instruction{
         return val.substring(val.length()-7);
     }
 
-    private void setImm8(String imm7){
+    private void setImm7(String imm7){
         if(imm7 == null)
             throw new RuntimeException("set une valeur de imm3 nul");
         if(!imm7.trim().startsWith("#"))

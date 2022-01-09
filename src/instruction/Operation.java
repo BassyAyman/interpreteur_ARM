@@ -102,44 +102,40 @@ public enum Operation {
 
     /**
      * @param label etiquette associer a l'operation
-     * @param imm immediate de cette operation, 0 si registre
+     * @param valeur faux si pas de # ,vrai si # dans l'expression (donc si imm)
+     * @param tailleLine taille de l'instruction, si 2 -> imm3 autre(si 4) -> imm8
      * @return l'operation assossier
      */
-    public static Operation getOperation(String label,ImmOperation imm) throws Exception{
+    public static Operation getOperation(String label,boolean valeur,int tailleLine) throws Exception{
         switch (label){
             case("LSLS") : {
-                if(imm == ImmOperation.imm5) return LSLS_A;
+                if(valeur) return LSLS_A;
                 else return LSLS_B;
             }
             case("LSRS") : {
-                if(imm == ImmOperation.imm5) return LSRS_A;
+                if(valeur) return LSRS_A;
                 else return LSRS_B;
             }
             case("ASRS") : {
-                if(imm == ImmOperation.imm5) return ASRS_A;
+                if(valeur) return ASRS_A;
                 else return ASRS_B;
             }
             case("ADDS") : {
-                if (imm == ImmOperation.imm0) return ADDS1;
-                else if(imm == ImmOperation.imm3) return  ADDS2;
-                else return ADDS3;
+                if(valeur){
+                    if(tailleLine == 2) return ADDS2;
+                    else return ADDS3;
+                }else return ADDS1;
             }
             case("SUBS") : {
-                if (imm == ImmOperation.imm0) return SUBS1;
-                else if(imm == ImmOperation.imm3) return  SUBS2;
-                else return SUBS3;
+                if(valeur){
+                    if(tailleLine == 2) return SUBS2;
+                    else return SUBS3;
+                }else return SUBS1;
             }
             case("CMP") : {
-                if (imm == ImmOperation.imm8) return CMP_A;
+                if (valeur) return CMP_A;
                 else return CMP_B;
             }
-            default:
-                throw new Exception(" Syntax Error : Bad operator name ");
-        }
-    }
-
-    public static Operation getOperation(String label) throws Exception{
-        switch (label){
             case("MOVS") : return MOVS;
             case("ANDS") : return ANDS;
             case("EORS") : return EORS;
@@ -176,7 +172,6 @@ public enum Operation {
             case("bGT") : return B_GT;
             case("bLE") : return B_LE;
             case("bAL") : return B_AL;
-
             default:
                 throw new Exception(" Syntax Error : Bad operator name ");
         }

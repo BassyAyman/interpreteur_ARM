@@ -25,8 +25,7 @@ public class Lecture{
      * effectue la lecture du fichier sur une ligne
      * et renvoie ligne par ligne une liste string des elements
      */
-    public ArrayList<String> lecture(){
-        String ligne = scan.nextLine();
-        return new ArrayList<>(List.of(ligne.split(" ")));
+    public String lecture(){
+        return scan.nextLine();
     }
 }

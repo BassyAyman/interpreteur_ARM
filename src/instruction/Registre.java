@@ -1,5 +1,7 @@
 package instruction;
 
+import java.util.Locale;
+
 public enum Registre {
     R0(0),
     R1(1),
@@ -36,17 +38,16 @@ public enum Registre {
      * @return  le registre correspondant a son string
      */
     public static Registre getRegistre(String code) throws Exception{
-        switch (code) {
-            case "R0": return Registre.R0;
-            case "R1": return Registre.R1;
-            case "R2": return Registre.R2;
-            case "R3": return Registre.R3;
-            case "R4": return Registre.R4;
-            case "R5": return Registre.R5;
-            case "R6": return Registre.R6;
-            case "R7": return Registre.R7;
-            default:
-                throw new Exception("Syntax Error : Bad register name ");
-        }
+        return switch (code.toUpperCase(Locale.ROOT).replace("[", "")) {
+            case "R0" -> Registre.R0;
+            case "R1" -> Registre.R1;
+            case "R2" -> Registre.R2;
+            case "R3" -> Registre.R3;
+            case "R4" -> Registre.R4;
+            case "R5" -> Registre.R5;
+            case "R6" -> Registre.R6;
+            case "R7" -> Registre.R7;
+            default -> throw new Exception("Syntax Error : Bad register name ");
+        };
     }
 }
